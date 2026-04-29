@@ -17,17 +17,21 @@ class Gain(node.Node):
         super().__init__(id, "AudioAmplifier", parameter, Poti)
 
 class Filter(node.Node):
+
+    parameterTitle = "Frequency"
+
     def __init__(self, id: str, parameter: float | None, Poti: node.Poti | None) -> None:
         super().__init__(id, "AudioFilterStateVariable", parameter, Poti)
 
     def getNodeInitCode(self):
-        return super().getNodeInitCode()
+        return f"{self.teensyAudioClass} {self.id};\n"
 
     def getNodeSetupCode(self):
-        return super().getNodeSetupCode()
+        return f"{self.id}.frequency(0);\n"
 
     def getNodeLoopCode(self):
-        return super().getNodeLoopCode()
+        if self.hasPoti():
+            return f"{self.id}.frequency({self.parameter}*{self.Poti.id}.getValue()*Divider);\n"
     
 
 
@@ -63,6 +67,8 @@ class Reverb(node.Node):
 
     def getNodeLoopCode(self):
         return super().getNodeLoopCode()
+    
+
 
 
 

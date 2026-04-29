@@ -15,3 +15,9 @@ class Graph:
             return True
         else:
             return False
+        
+    def getInitCode(self):
+        code = ""
+        for node in self.nodes:
+            code+= f"AudioConnection patch{nodes.index(node)}()  + \n"  #toDo: Audio Conecctions 
+        return code
