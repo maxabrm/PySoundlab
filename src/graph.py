@@ -9,3 +9,9 @@ class Graph:
 
     def add_node(self, node):
         self.nodes.append(node)
+
+    def hasPoti(self, node) -> bool:
+        if node.Poti is not None:
+            return True
+        else:
+            return False

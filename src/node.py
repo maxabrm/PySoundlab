@@ -13,15 +13,17 @@ class Poti:
         self.maxValue = maxValue
 
     def getPotiInitCode(self) -> str:
-        ##toDo: Implement TeenysAudio Code
-        return f"AudioControlSGTL5000 {self.id}({self.inputPin}, {self.resistance}, {self.maxValue});\n"
+        return f"ResponsiveAnalogRead {self.id}({self.inputPin}, true);\n"
+    
+    def getPotiLoopCode(self) -> str:
+        return f"{self.id}.update();\n"
 
 class Node: 
 
     id: str
     teensyAudioClass: str
     parameter: float
-    Poti: Poti
+    Poti: Poti | None
 
 
     def __init__(self, id: str, teensyAudioClass: str, parameter: float, Poti: Poti | None) -> None:
@@ -30,6 +32,14 @@ class Node:
         self.parameter = parameter
         self.Poti = Poti
 
+    def hasPoti(self) -> bool:
+        if self.Poti is not None:
+            return True
+        else:
+            return False
+
+    def getID(self) -> str:
+        return self.id
         
     def getNodeInitCode(self) -> str:
         ##toDo: Implement TeenysAudio Code
