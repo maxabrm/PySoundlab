@@ -1,4 +1,5 @@
-import nodes.nodes as nodes
+import nodes
+
 class Graph:
     #variables
     nodes = []
@@ -7,7 +8,7 @@ class Graph:
     def __init__(self):
         self.nodes = []
 
-    def add_node(self, node):
+    def addNode(self, node):
         self.nodes.append(node)
 
     def hasPoti(self, node) -> bool:
@@ -18,6 +19,8 @@ class Graph:
         
     def getInitCode(self):
         code = ""
-        for node in self.nodes:
-            code+= f"AudioConnection patch{nodes.index(node)}()  + \n"  #toDo: Audio Conecctions 
+        for i in range(len(self.nodes) - 1):  # Alle Nodes außer der letzten
+            current_node = self.nodes[i]
+            next_node = self.nodes[i + 1]
+            code += f"AudioConnection patch_{i}({current_node.id}, 0, {next_node.id}, 0);\n"
         return code

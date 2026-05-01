@@ -14,7 +14,8 @@ class CodeGenerator:
 
          #initialize libraries -> Nei zeiten mal an die Nodes anpassen, damit nur die benötigten Libraries inkludiert werden
         self.code += "//Generated Code\n\n"
-        if graph.hasPoti():
+        hasPoti = any(node.hasPoti() for node in graph.nodes)
+        if hasPoti:
             self.code += "#include <ResponsiveAnalogRead.h>\n"  # Poti Werte auslesen
         self.code += "#include <Audio.h>\n" 
         self.code += "#include <Wire.h>\n"
@@ -31,19 +32,27 @@ class CodeGenerator:
             if node.hasPoti():
                 self.code+=node.Poti.getPotiInitCode()
             self.code+=node.getNodeInitCode()
+        
+        self.code += "/// Initialize Connections\n\n"
+         #initialize connections code
+        self.code += f"{graph.getInitCode()}\n\n"
+
 
         #setup
+        self.code += "void setup() {\n"
         for node in graph.nodes:
              #toDo: Generate Code
-            self.code+=node.getNodeSetupCode(node)   
-
+            self.code+=node.getNodeSetupCode()   
+        self.code += "}\n\n"
         #main loop
         self.code += "void loop() {\n"
 
         for node in graph.nodes:
             if node.hasPoti():
                 self.code+=node.Poti.getPotiLoopCode()
-            self.code+=node.getNodeLoopCode(node) 
+            loopCode = node.getNodeLoopCode()
+            if loopCode:
+                self.code += loopCode
         self.code += "}\n"
         return self.code
 

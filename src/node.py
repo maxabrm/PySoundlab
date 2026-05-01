@@ -1,4 +1,6 @@
 
+from typing import Optional
+
 class Poti:
     id: str
     inputPin: str
@@ -13,20 +15,23 @@ class Poti:
         self.maxValue = maxValue
 
     def getPotiInitCode(self) -> str:
-        return f"ResponsiveAnalogRead {self.id}({self.inputPin}, true);\n"
+        code = f"{self.id}_divider = 1.0/{self.maxValue};\n"
+        code += f"ResponsiveAnalogRead {self.id}({self.inputPin}, true);\n"
+        return code
     
     def getPotiLoopCode(self) -> str:
-        return f"{self.id}.update();\n"
+        code = f"{self.id}.update();\n"
+        return code
 
 class Node: 
 
     id: str
     teensyAudioClass: str
     parameter: float
-    Poti: Poti | None
+    Poti: Optional['Poti']
 
 
-    def __init__(self, id: str, teensyAudioClass: str, parameter: float, Poti: Poti | None) -> None:
+    def __init__(self, id: str, teensyAudioClass: str, parameter: float, Poti: Optional['Poti']) -> None:
         self.id = id
         self.teensyAudioClass = teensyAudioClass
         self.parameter = parameter
@@ -43,7 +48,7 @@ class Node:
         
     def getNodeInitCode(self) -> str:
         ##toDo: Implement TeenysAudio Code
-        return f"{self.teensyAudioClass} {self.id}({self.parameter});\n"
+        return f"{self.teensyAudioClass} {self.id};\n"
     
     def getNodeSetupCode(self) -> str:
         ##toDo: Implement TeenysAudio Code
