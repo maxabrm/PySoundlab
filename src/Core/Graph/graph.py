@@ -1,4 +1,4 @@
-import nodes
+import Core.Node.nodes as nodes
 
 class Graph:
     #variables

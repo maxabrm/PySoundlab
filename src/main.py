@@ -4,10 +4,10 @@ PySoundLab - A Python project for sound processing and analysis.
 """
 
 import sys
-import node
-import nodes
-import graph
-import generator
+import Core.Node.node as node
+import Core.Node.nodes as nodes
+import Core.Graph.graph as graph
+import Core.CodeGen.generator as generator
 
 def main():
     print("// Welcome to PySoundLab!")

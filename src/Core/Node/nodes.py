@@ -1,4 +1,4 @@
-import node
+import Core.Node.node as node
 from typing import Optional
 
 class AudioInput(node.Node):
