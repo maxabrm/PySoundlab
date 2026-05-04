@@ -1,24 +1,24 @@
 import Core.Node.nodes as nodes
 import Core.Graph.graph as graph
+from pydantic import BaseModel
+
+class CodeGenerator(BaseModel):
 
 
-class CodeGenerator:
+    code: str
+    audioGraph: graph.Graph
 
-#variables
-    code = ""
-    graph = None
-
-#methods
-    def __init__(self, graph):
+    def __init__(self, audioGraph: graph.Graph) -> None:
         self.code = ""
+        self.audioGraph = audioGraph
 
-    def generate_code(self, graph):
-        self.graph = graph
+    def generate_code(self, audioGraph: graph.Graph):
+        self.audioGraph = audioGraph
         self.code = ""
 
          #initialize libraries -> Nei zeiten mal an die Nodes anpassen, damit nur die benötigten Libraries inkludiert werden
         self.code += "//Generated Code\n\n"
-        hasPoti = any(node.hasPoti() for node in graph.nodes)
+        hasPoti = any(node.hasPoti() for node in self.audioGraph.nodes)
         if hasPoti:
             self.code += "#include <ResponsiveAnalogRead.h>\n"  # Poti Werte auslesen
         self.code += "#include <Audio.h>\n" 
@@ -31,7 +31,7 @@ class CodeGenerator:
 
 
         #initialize objects code
-        for node in graph.nodes:
+        for node in self.audioGraph.nodes:
             self.code+=f"// Setup {node.getID()}\n"
             if node.hasPoti():
                 self.code+=node.Poti.getPotiInitCode()
@@ -39,19 +39,20 @@ class CodeGenerator:
         
         self.code += "/// Initialize Connections\n\n"
          #initialize connections code
-        self.code += f"{graph.getInitCode()}\n\n"
+        for connection in self.audioGraph.connections:
+            self.code+=connection.getConnectionCode()
 
 
         #setup
         self.code += "void setup() {\n"
-        for node in graph.nodes:
+        for node in self.audioGraph.nodes:
              #toDo: Generate Code
             self.code+=node.getNodeSetupCode()   
         self.code += "}\n\n"
         #main loop
         self.code += "void loop() {\n"
 
-        for node in graph.nodes:
+        for node in self.audioGraph.nodes:
             if node.hasPoti():
                 self.code+=node.Poti.getPotiLoopCode()
             loopCode = node.getNodeLoopCode()

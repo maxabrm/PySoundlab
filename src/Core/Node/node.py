@@ -1,7 +1,8 @@
 
 from typing import Optional
+from pydantic import BaseModel
 
-class Poti:
+class Poti(BaseModel):
     id: str
     inputPin: str
     resistance: float
@@ -23,18 +24,20 @@ class Poti:
         code = f"{self.id}.update();\n"
         return code
 
-class Node: 
+class Node(BaseModel): 
 
     id: str
     teensyAudioClass: str
     parameter: float
+    parameterTitle: str
     Poti: Optional['Poti']
 
 
-    def __init__(self, id: str, teensyAudioClass: str, parameter: float, Poti: Optional['Poti']) -> None:
+    def __init__(self, id: str, teensyAudioClass: str, parameter: float, parameterTitle: str, Poti: Optional['Poti']) -> None:
         self.id = id
         self.teensyAudioClass = teensyAudioClass
         self.parameter = parameter
+        self.parameterTitle = parameterTitle
         self.Poti = Poti
 
     def hasPoti(self) -> bool:
@@ -57,3 +60,6 @@ class Node:
     def getNodeLoopCode(self) -> str:   
         ##toDo: Implement TeenysAudio Code
         return f"{self.id}.update();\n"
+
+    def setParameter(self, parameter: float):
+        self.parameter = parameter

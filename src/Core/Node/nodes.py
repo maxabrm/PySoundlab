@@ -3,25 +3,23 @@ from typing import Optional
 
 class AudioInput(node.Node):
     def __init__(self, id: str) -> None:
-        super().__init__(id, "AudioInputI2S", None, None)
+        super().__init__(id, "AudioInputI2S", None, None, None)
 
 class AudioOutput(node.Node):
     def __init__(self, id: str) -> None:
-        super().__init__(id, "AudioOutputI2S", None, None)
+        super().__init__(id, "AudioOutputI2S", None, None, None)
 
 class Gain(node.Node):
 
-    parameterTitle = "Gain"
-
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
-        super().__init__(id, "AudioAmplifier", parameter, Poti)
+        super().__init__(id, "AudioAmplifier", parameter, "Gain", Poti)
 
 class Filter(node.Node):
 
-    parameterTitle = "Frequency"
+   
 
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
-        super().__init__(id, "AudioFilterStateVariable", parameter, Poti)
+        super().__init__(id, "AudioFilterStateVariable", parameter, "Frequency", Poti)
 
     def getNodeInitCode(self):
         return f"{self.teensyAudioClass} {self.id};\n"
@@ -39,10 +37,10 @@ class Filter(node.Node):
 
 class Delay(node.Node):
 
-    parameterTitle = "Delay Time"
+    
 
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
-        super().__init__(id, "AudioDelay", parameter, Poti)
+        super().__init__(id, "AudioDelay", parameter, "Delay Time", Poti)
 
     def getNodeInitCode(self):
         return super().getNodeInitCode()
@@ -56,10 +54,10 @@ class Delay(node.Node):
 
 class Reverb(node.Node):
 
-    parameterTitle = "Reverb Time"
+   
 
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
-        super().__init__(id, "AudioEffectFreeverb", parameter, Poti)  
+        super().__init__(id, "AudioEffectFreeverb", parameter, "Reverb Time", Poti)
 
     def getNodeInitCode(self):
         return super().getNodeInitCode()
