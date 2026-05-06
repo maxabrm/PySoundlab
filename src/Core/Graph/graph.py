@@ -1,9 +1,8 @@
 import Core.Node.nodes as nodes
 import Core.Node.node as node
-from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 
-class Connection(BaseModel):
+class Connection:
     node1: node.Node
     node2: node.Node    
 
@@ -14,7 +13,7 @@ class Connection(BaseModel):
     def getConnectionCode(self) -> str:
         return f"AudioConnection patch_{self.audioGraph.connections.index(self)}({self.node1.id}, 0, {self.node2.id}, 0);\n"
 
-class Graph(BaseModel):
+class Graph:
     #variables
     nodes: List[node.Node] = []
     connections: List[Connection] = []

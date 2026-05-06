@@ -1,8 +1,7 @@
 
 from typing import Optional
-from pydantic import BaseModel
 
-class Poti(BaseModel):
+class Poti:
     id: str
     inputPin: str
     resistance: float
@@ -24,7 +23,7 @@ class Poti(BaseModel):
         code = f"{self.id}.update();\n"
         return code
 
-class Node(BaseModel): 
+class Node: 
 
     id: str
     teensyAudioClass: str

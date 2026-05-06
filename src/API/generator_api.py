@@ -1,11 +1,11 @@
 from fastapi import APIRouter
-import Core.Graph.graph as graph
-import Core.Node.nodes as nodes
+import Models.graph_model as graph
+import Models.node_model as nodes
 
 router = APIRouter()
 
 @router.post("/generateCode")
-def generate_code(graph: graph.Graph):
+def generate_code(graph: graph.GraphModel):
     generator = generator.CodeGenerator(graph)
     code = generator.generate_code(graph)
     return f"Code für Teensy:\n{code}"

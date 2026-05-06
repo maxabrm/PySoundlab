@@ -1,8 +1,7 @@
 import Core.Node.nodes as nodes
 import Core.Graph.graph as graph
-from pydantic import BaseModel
 
-class CodeGenerator(BaseModel):
+class CodeGenerator:
 
 
     code: str
