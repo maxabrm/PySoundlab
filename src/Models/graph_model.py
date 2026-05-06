@@ -1,8 +1,13 @@
 from pydantic import BaseModel
+import Models.node_model as node
+
+class ConnectionModel(BaseModel):
+    id: int
+    node1: node.NodeModel
+    node2: node.NodeModel
 
 class GraphModel(BaseModel):
-    id: str
-    name: str
-    nodes: list
-    connections: list
-    
+    nodes: list[node.NodeModel]
+    connections: list[ConnectionModel]
+
+

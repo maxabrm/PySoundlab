@@ -11,4 +11,4 @@ class NodeModel(BaseModel):
     id: str
     type: str
     Poti: PotiModel
-    config: Dict[str, Any]
+    parameter: float

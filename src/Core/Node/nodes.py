@@ -1,6 +1,8 @@
 import Core.Node.node as node
 from typing import Optional
 
+#ToDo Nodes ausarbeiten
+
 class AudioInput(node.Node):
     def __init__(self, id: str) -> None:
         super().__init__(id, "AudioInputI2S", None, None, None)
@@ -15,8 +17,6 @@ class Gain(node.Node):
         super().__init__(id, "AudioAmplifier", parameter, "Gain", Poti)
 
 class Filter(node.Node):
-
-   
 
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
         super().__init__(id, "AudioFilterStateVariable", parameter, "Frequency", Poti)

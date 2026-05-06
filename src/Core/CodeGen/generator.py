@@ -15,7 +15,7 @@ class CodeGenerator:
         self.audioGraph = audioGraph
         self.code = ""
 
-         #initialize libraries -> Nei zeiten mal an die Nodes anpassen, damit nur die benötigten Libraries inkludiert werden
+         #initialize libraries -> Bei zeiten mal an die Nodes anpassen, damit nur die benötigten Libraries inkludiert werden
         self.code += "//Generated Code\n\n"
         hasPoti = any(node.hasPoti() for node in self.audioGraph.nodes)
         if hasPoti:
