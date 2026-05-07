@@ -1,6 +1,6 @@
-from Mapper.node_mapper import NodeMapper
-from Models.node_model import NodeModel
-from Core.Node.nodes import Reverb
+from Mapper.NodeMapper import NodeMapper
+from Models.NodeModel import NodeModel
+from Core.Node.Nodes import Reverb
 
 @NodeMapper.registerNode("Reverb")
 def create_reverb_node(nodeModel: NodeModel) -> Reverb:

@@ -1,4 +1,4 @@
-import Core.Node.node as node
+import Core.Node.Node as node
 from typing import Optional
 
 #ToDo Nodes ausarbeiten

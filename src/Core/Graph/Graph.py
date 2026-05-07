@@ -1,5 +1,5 @@
-import Core.Node.nodes as nodes
-import Core.Node.node as node
+import Core.Node.Nodes as nodes
+import Core.Node.Node as node
 from typing import List
 
 class Connection:

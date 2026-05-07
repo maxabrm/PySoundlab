@@ -1,5 +1,5 @@
-import Core.Node.nodes as nodes
-import Core.Graph.graph as graph
+import Core.Node.Nodes as nodes
+import Core.Graph.Graph as graph
 
 class CodeGenerator:
 

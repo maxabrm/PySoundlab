@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-import Models.node_model as node
+import Models.NodeModel as node
 
 class ConnectionModel(BaseModel):
     id: int

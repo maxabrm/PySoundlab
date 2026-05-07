@@ -1,5 +1,5 @@
-from Core.Node.node import Node
-from Models.node_model import NodeModel
+from Core.Node.Node import Node
+from Models.NodeModel import NodeModel
 from typing import Callable, Dict
 
 #ToDo: Create Funktion für Graph und Connection

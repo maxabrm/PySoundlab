@@ -1,6 +1,6 @@
-from Mapper.node_mapper import NodeMapper
-from Models.node_model import NodeModel
-from Core.Node.nodes import Delay
+from Mapper.NodeMapper import NodeMapper
+from Models.NodeModel import NodeModel
+from Core.Node.Nodes import Delay
 
 @NodeMapper.registerNode("Delay")
 def create_delay_node(nodeModel: NodeModel) -> Delay:

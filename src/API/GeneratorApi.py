@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-import Models.graph_model as graph
-import Models.node_model as nodes
+import Models.GraphModel as graph
+import Models.NodeModel as nodes
 
 router = APIRouter()
 

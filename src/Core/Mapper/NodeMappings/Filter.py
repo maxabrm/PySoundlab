@@ -1,6 +1,6 @@
-from Mapper.node_mapper import NodeMapper
-from Models.node_model import NodeModel 
-from Core.Node.nodes import Filter
+from Mapper.NodeMapper import NodeMapper
+from Models.NodeModel import NodeModel
+from Core.Node.Nodes import Filter
 
 @NodeMapper.registerNode("Filter")
 def create_filter_node(nodeModel: NodeModel) -> Filter:
