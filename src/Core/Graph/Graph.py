@@ -50,6 +50,22 @@ class Graph:
         if node_to_remove:
             self.removeNode(node_to_remove)
 
+    def validateGraph(self) -> bool:
+        for connection in self.connections:
+            if connection.node1 not in self.nodes or connection.node2 not in self.nodes:
+                return False
+            if connection.node1 == connection.node2:
+                return False
+        if not any(isinstance(node, nodes.AudioOutput) for node in self.nodes):
+            return False
+        if not any(isinstance(node, nodes.AudioInput) for node in self.nodes):
+            return False
+        if any(isinstance(node, nodes.AudioOutput) for node in self.connections.node1):
+            return False
+        if any(isinstance(node, nodes.AudioInput) for node in self.connections.node2):  
+            return False
+        return True
+
     def hasPoti(self, node) -> bool:
         if node.Poti is not None:
             return True
