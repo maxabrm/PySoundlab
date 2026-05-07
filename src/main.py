@@ -4,13 +4,13 @@ PySoundLab - A Python project for sound processing and analysis.
 """
 
 import sys
+import Core.Mapper.NodeMappings
 import Core.Node.Node as node
 import Core.Node.Nodes as nodes
 import Core.Graph.Graph as graph
 import Core.CodeGen.Generator as generator
 import API.GraphApi as graph_api
-import API.GeneratorApi as generator_api
-import API.NodeApi as node_api
+
 from fastapi import FastAPI
 
 def main():
@@ -18,8 +18,6 @@ def main():
 
     app = FastAPI()
     app.include_router(graph_api.router, prefix="/graph")
-    app.include_router(generator_api.router, prefix="/generator")
-    app.include_router(node_api.router, prefix="/node")
 
   # Schneller Test  
     print("// Welcome to PySoundLab!")
