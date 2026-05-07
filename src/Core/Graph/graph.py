@@ -49,7 +49,6 @@ class Graph:
         node_to_remove = next((node for node in self.nodes if node.id == id), None)
         if node_to_remove:
             self.removeNode(node_to_remove)
-            self.removeConnectionsOfNode(node_to_remove)
 
     def hasPoti(self, node) -> bool:
         if node.Poti is not None:

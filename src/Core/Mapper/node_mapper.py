@@ -11,7 +11,7 @@ class NodeMapper:
     @classmethod
     def registerNode(cls, nodeType: str):
         def decorator(func: Callable[[NodeModel], Node]):
-            cls._NodeRegistry[nodeType] = func
+            cls._nodeRegistry[nodeType] = func
             return func
         return decorator
 

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, Any
+from typing import Optional
 
 class PotiModel(BaseModel):
     id: str
@@ -10,5 +10,5 @@ class PotiModel(BaseModel):
 class NodeModel(BaseModel):
     id: str
     type: str
-    Poti: PotiModel
-    parameter: float
+    Poti: Optional[PotiModel] = None
+    parameter: Optional[float] = None

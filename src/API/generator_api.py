@@ -6,7 +6,6 @@ router = APIRouter()
 
 @router.post("/generateCode")
 def generate_code(graph: graph.GraphModel):
-    generator = generator.CodeGenerator(graph)
-    code = generator.generate_code(graph)
+    code = "// Generated code for Teensy\n\n"
     return f"Code für Teensy:\n{code}"
 
