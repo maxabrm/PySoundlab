@@ -60,9 +60,9 @@ class Graph:
             return False
         if not any(isinstance(node, nodes.AudioInput) for node in self.nodes):
             return False
-        if any(isinstance(node, nodes.AudioOutput) for node in self.connections.node1):
+        if any(isinstance(conn.node1, nodes.AudioOutput) for conn in self.connections):
             return False
-        if any(isinstance(node, nodes.AudioInput) for node in self.connections.node2):  
+        if any(isinstance(conn.node2, nodes.AudioInput) for conn in self.connections):
             return False
         return True
 
