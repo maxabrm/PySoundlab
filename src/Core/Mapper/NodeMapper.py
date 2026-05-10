@@ -1,10 +1,8 @@
-from Core.Node.Node import Node
-from Models.NodeModel import NodeModel
-from typing import Callable, Dict
+from Core.Node.Node import Node, Poti
+from Models.NodeModel import NodeModel, PotiModel
+from typing import Callable, Dict, Optional
 
-#ToDo: Create Funktion für Graph und Connection
-
-class NodeMapper:  
+class NodeMapper:
 
     _nodeRegistry: Dict[str, Callable[[NodeModel], Node]] = {}
 
@@ -14,6 +12,12 @@ class NodeMapper:
             cls._nodeRegistry[nodeType] = func
             return func
         return decorator
+
+    @classmethod
+    def mapPoti(cls, potiModel: Optional[PotiModel]) -> Optional[Poti]:
+        if potiModel is None:
+            return None
+        return Poti(potiModel.id, potiModel.inputPin, potiModel.resistance, potiModel.maxValue)
 
     @classmethod
     def createNode(cls, nodeModel: NodeModel) -> Node:

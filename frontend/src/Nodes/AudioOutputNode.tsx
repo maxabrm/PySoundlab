@@ -11,7 +11,7 @@ export default function AudioOutputNode({ data }: { data: AudioOutputNodeData })
     <div style={{ padding: '10px', border: '1px solid black', borderRadius: 5, backgroundColor: 'white' }}>
       <div>AudioOutput</div>
       <div>Pin:{data.outputPin}</div>
-      <Handle type="source" position={Position.Left} />
+      <Handle type="target" position={Position.Left} />
     </div>
   );
 }

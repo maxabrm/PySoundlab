@@ -10,5 +10,6 @@ class PotiModel(BaseModel):
 class NodeModel(BaseModel):
     id: str
     type: str
+    inputPin: Optional[str] = None
     Poti: Optional[PotiModel] = None
     parameter: Optional[float] = None

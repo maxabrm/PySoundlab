@@ -4,4 +4,4 @@ from Core.Node.Nodes import Filter
 
 @NodeMapper.registerNode("Filter")
 def create_filter_node(nodeModel: NodeModel) -> Filter:
-    return Filter(nodeModel.id, nodeModel.parameter, nodeModel.Poti)
+    return Filter(nodeModel.id, nodeModel.parameter, NodeMapper.mapPoti(nodeModel.Poti))
