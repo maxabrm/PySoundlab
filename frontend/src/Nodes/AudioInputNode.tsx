@@ -1,16 +1,17 @@
-import {Handle, Position} from '@xyflow/react';
+import { Handle, Position } from '@xyflow/react';
+import '../App.css';
 
 interface AudioInputNodeData {
-  type: string;
   inputPin: string;
 }
 
-export default function AudioInputNode({ data }: { data: AudioInputNodeData })
-{
+export default function AudioInputNode({ data }: { data: AudioInputNodeData }) {
   return (
-    <div style={{ padding: '10px', border: '1px solid black', borderRadius: 5, backgroundColor: 'white' }}>    
-      <div>AudioInput</div>
-      <div>Pin:{data.inputPin}</div>
+    <div className="node">
+      <div className="node__header">Audio Input</div>
+      <div className="node__body">
+        <div className="node__info">Pin: {data.inputPin}</div>
+      </div>
       <Handle type="source" position={Position.Right} />
     </div>
   );

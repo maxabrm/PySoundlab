@@ -1,6 +1,7 @@
 import { ReactFlow, useNodesState, useEdgesState, addEdge } from '@xyflow/react';
 import type { Node, Edge, Connection } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import './App.css';
 import AudioInputNode from './Nodes/AudioInputNode';
 import AudioOutputNode from './Nodes/AudioOutputNode';
 import PotitNode from './Nodes/PotiNode';
@@ -18,7 +19,7 @@ const nodeTypes = {
   Delay: DelayNode,
   Filter: FilterNode,
   Gain: GainNode,
-  Reverb: ReverbNode
+  Reverb: ReverbNode,
 };
 
 export default function App() {
@@ -91,22 +92,20 @@ export default function App() {
   }
 
   return (
-    <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+    <div className="app">
 
-      {/* Linke Sidebar */}
-      <div style={{ width: '180px', background: 'darkblue', padding: '16px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        <h3 style={{ color: 'white', margin: '0 0 12px 0' }}>Nodes</h3>
+      <div className="sidebar">
+        <h3 className="panel-title">Nodes</h3>
         <button onClick={() => addNode('AudioInput')}>+ Audio Input</button>
         <button onClick={() => addNode('AudioOutput')}>+ Audio Output</button>
         <button onClick={() => addNode('Poti')}>+ Poti</button>
         <button onClick={() => addNode('Delay')}>+ Delay</button>
         <button onClick={() => addNode('Filter')}>+ Filter</button>
         <button onClick={() => addNode('Gain')}>+ Gain</button>
-        <button  onClick={() => addNode('Reverb')}>+ Reverb</button>
+        <button onClick={() => addNode('Reverb')}>+ Reverb</button>
       </div>
 
-      {/* Canvas */}
-      <div style={{ flex: 1 }}>
+      <div className="canvas">
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -118,39 +117,34 @@ export default function App() {
         />
       </div>
 
-      {/* Rechtes Panel */}
-      <div style={{ width: '220px', background: 'darkblue', display: 'flex', flexDirection: 'column' }}>
+      <div className="right-panel">
 
-        {/* Node Editor*/}
-        <div style={{ height: '30%', padding: '16px', borderBottom: '1px solid #333', overflowY: 'auto' }}>
-          <h3 style={{ color: 'white', margin: '0 0 12px 0' }}>Node Editor</h3>
+        <div className="node-editor">
+          <h3 className="panel-title">Node Editor</h3>
           {selectedNode ? (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <p style={{ color: '#aaa', margin: 0 }}>{selectedNode.type}</p>
+            <div className="node-editor__fields">
+              <p className="node-editor__type">{selectedNode.type}</p>
               {Object.entries(selectedNode.data).map(([key, value]) => (
-                <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                  <label style={{ color: '#aaa', fontSize: '12px' }}>{key}</label>
+                <div key={key} className="node-editor__field">
+                  <label className="node-editor__label">{key}</label>
                   <input
+                    className="node-editor__input"
                     type={typeof value === 'number' ? 'number' : 'text'}
                     value={value as string}
                     onChange={(e) => updateNodeData(key, e.target.value)}
-                    style={{ padding: '4px', borderRadius: '4px', border: '1px solid #555', background: '#2a2a3e', color: 'white' }}
                   />
                 </div>
               ))}
             </div>
           ) : (
-            <p style={{ color: '#555', fontSize: '12px' }}>Keine Node ausgewählt</p>
+            <p className="node-editor__empty">Keine Node ausgewählt</p>
           )}
         </div>
 
-        {/* Code Fenster */}
-        <div style={{ height: '70%', padding: '16px', overflowY: 'auto' }}>
-          <h3 style={{ color: 'white', margin: '0 0 12px 0' }}>Code</h3>
-          <button style={{ marginBottom: '8px' }} onClick={generateCode}>
-            Code generieren
-          </button>
-          <pre style={{ height: '70%', overflowY: 'auto', background: '#282c34', color: '#abb2bf', borderRadius: '4px', fontSize: '12px', padding: '8px', margin: 0, whiteSpace: 'pre' }}>
+        <div className="code-panel">
+          <h3 className="panel-title">Code</h3>
+          <button onClick={generateCode}>Code generieren</button>
+          <pre className="code-display">
             {generatedCode || '// Hier steht bald Code!'}
           </pre>
         </div>

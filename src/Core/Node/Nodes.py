@@ -23,10 +23,7 @@ class Gain(node.Node):
         return f"{self.id}.;\n"
 
     def getNodeLoopCode(self):
-        if self.hasPoti():
-            return f"{self.id}.frequency({self.parameter}*({self.Poti.id}.getValue()*{self.Poti.id}_divider));\n"
-        else:
-            return f"{self.id}.frequency({self.parameter});\n"
+            return f"" # Wavehaper function fehlt noch
 
 
 class Filter(node.Node):
