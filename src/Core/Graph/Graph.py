@@ -85,11 +85,13 @@ class Graph:
         nextNodes= {n: None for n in self.nodes}
 
         for conn in self.connections:
-            nextNodes[conn.node1].append(conn.node2)
+            nextNodes[conn.node1] = conn.node2
             CountInConnections[conn.node2] += 1
-            
+
         sorted_nodes = []
-        iterationNode = next(n for n in self.nodes if CountInConnections[n] == 0)
+        iterationNode = next((n for n in self.nodes if CountInConnections[n] == 0), None)
+        if iterationNode is None:
+            return
 
         sorted_nodes.append(iterationNode)
 
