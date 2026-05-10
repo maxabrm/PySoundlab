@@ -1,27 +1,24 @@
 # PySoundLab
 
-A Python project for sound processing and analysis.
+Kleines Projekt für die CodeGenerierung eines AudioEffekt-"Pedals" auf Basis des Teensy 4.0 inkl. Audio Shield. 
+Effektketten können per ReactFlow gezeichnet werden, aus der Effekt-Kette wird im Anschluss Code erzeugt.
 
 ## Setup
-
+   
 1. Ensure Python 3.8+ is installed.
 2. Install dependencies:
    ```
    pip install -r requirements.txt
    ```
 
-## Usage
+## ToBe Continued
+Effekte ausbauen
+Multi-Poti/Multi Parameter support um alle Funktionen der TeensyAudio-Klassen anzusprechen 
 
-Run the main script:
-```
-python main.py
-```
 
 ## Features
-
-- Sound recording and playback
-- Audio analysis
-- Visualization of waveforms
+Input, Output, Filter,Reverb, Gain und Delay Effekte
+Code Erzeugung für Andruino 
 
 ## Contributing
 
