@@ -37,6 +37,7 @@ export function buildGraphPayload(nodes: Node[], edges: Edge[]) {
       if (n.type === 'Gain') return { ...base, type: 'Gain', parameter: Number(d.gain), Poti: potiField };
       if (n.type === 'Filter') return { ...base, type: 'Filter', parameter: Number(d.frequency), Poti: potiField };
       if (n.type === 'Delay') return { ...base, type: 'Delay', parameter: Number(d.delayTime), Poti: potiField };
+      if (n.type === 'Reverb') return { ...base, type: 'Reverb', parameter: Number(d.roomSize), Poti: potiField };
     });
 
   // Connections ermitteln ohne Poti Connections

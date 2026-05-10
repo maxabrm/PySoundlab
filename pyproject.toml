@@ -7,7 +7,7 @@ name = "PySoundLab"
 version = "0.1.0"
 description = "A Python project for sound processing and analysis"
 authors = [
-    {name = "Your Name", email = "your.email@example.com"},
+    {name = "maxabram", email = "max.abram@outlook.com"},
 ]
 dependencies = [
     "fastapi>=0.100.0",

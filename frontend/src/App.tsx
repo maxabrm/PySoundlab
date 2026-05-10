@@ -28,10 +28,17 @@ export default function App() {
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   const [nodeCounters, setNodeCounters] = useState<Record<string, number>>({});
   const [generatedCode, setGeneratedCode] = useState('');
+  const [copied, setCopied] = useState(false);
+
+  function copyCode() {
+    if (!generatedCode) return;
+    navigator.clipboard.writeText(generatedCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   async function generateCode() {
     const payload = buildGraphPayload(nodes, edges);
-    console.log('Payload:', JSON.stringify(payload, null, 2));
     try {
       const res = await fetch('http://localhost:8000/graph/generateCode', {
         method: 'POST',
@@ -45,7 +52,6 @@ export default function App() {
         return;
       }
       const data = await res.json();
-      console.log('Code raw:', JSON.stringify(data.code));
       setGeneratedCode(data.code ?? '');
     } catch (e) {
       console.error('Fetch failed:', e);
@@ -144,9 +150,14 @@ export default function App() {
         <div className="code-panel">
           <h3 className="panel-title">Code</h3>
           <button onClick={generateCode}>Code generieren</button>
-          <pre className="code-display">
-            {generatedCode || '// Hier steht bald Code!'}
-          </pre>
+          <div className="code-display-wrapper">
+            <button className="copy-btn" onClick={copyCode}>
+              {copied ? '✓' : '⧉'}
+            </button>
+            <pre className="code-display">
+              {generatedCode || '// Hier steht bald Code!'}
+            </pre>
+          </div>
         </div>
 
       </div>
