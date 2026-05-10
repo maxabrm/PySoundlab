@@ -14,7 +14,20 @@ class AudioOutput(node.Node):
 class Gain(node.Node):
 
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
-        super().__init__(id, "AudioAmplifier", parameter, "Gain", Poti)
+        super().__init__(id, "AudioEffectWaveshaper ", parameter, "Gain", Poti)
+      
+    def getNodeInitCode(self):
+        return f"{self.teensyAudioClass} {self.id};\n"
+
+    def getNodeSetupCode(self):
+        return f"{self.id}.;\n"
+
+    def getNodeLoopCode(self):
+        if self.hasPoti():
+            return f"{self.id}.frequency({self.parameter}*({self.Poti.id}.getValue()*{self.Poti.id}_divider));\n"
+        else:
+            return f"{self.id}.frequency({self.parameter});\n"
+
 
 class Filter(node.Node):
 
@@ -37,8 +50,6 @@ class Filter(node.Node):
 
 class Delay(node.Node):
 
-    
-
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
         super().__init__(id, "AudioDelay", parameter, "Delay Time", Poti)
 
@@ -54,19 +65,20 @@ class Delay(node.Node):
 
 class Reverb(node.Node):
 
-   
-
     def __init__(self, id: str, parameter: Optional[float], Poti: Optional[node.Poti]) -> None:
         super().__init__(id, "AudioEffectFreeverb", parameter, "Reverb Time", Poti)
 
     def getNodeInitCode(self):
-        return super().getNodeInitCode()
+        return f"{self.teensyAudioClass} {self.id};\n"
 
     def getNodeSetupCode(self):
-        return super().getNodeSetupCode()
+       return f"{self.id}.roomsize({0});\n"
 
     def getNodeLoopCode(self):
-        return super().getNodeLoopCode()
+        if self.hasPoti():
+            return f"{self.id}.roomsize({self.parameter}*({self.Poti.id}.getValue()*{self.Poti.id}_divider));\n"
+        else:
+            return f"{self.id}.roomsize({self.parameter});\n"
     
 
 

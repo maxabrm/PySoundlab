@@ -7,6 +7,7 @@ import PotitNode from './Nodes/PotiNode';
 import DelayNode from './Nodes/DelayNode';
 import FilterNode from './Nodes/FilterNode';
 import GainNode from './Nodes/GainNode';
+import ReverbNode from './Nodes/ReverbNode';
 import { useState } from 'react';
 import { buildGraphPayload } from './utils/buildGraphPayload';
 
@@ -17,6 +18,7 @@ const nodeTypes = {
   Delay: DelayNode,
   Filter: FilterNode,
   Gain: GainNode,
+  Reverb: ReverbNode
 };
 
 export default function App() {
@@ -64,6 +66,7 @@ export default function App() {
     Poti:        { inputPin: 'A0', resistance: 10000, maxValue: 1023 },
     Filter:      { frequency: 1000 },
     Gain:        { gain: 1.0 },
+    Reverb:      { roomSize: 50 },
     Delay:       { delayTime: 100 },
   };
 
@@ -99,6 +102,7 @@ export default function App() {
         <button onClick={() => addNode('Delay')}>+ Delay</button>
         <button onClick={() => addNode('Filter')}>+ Filter</button>
         <button onClick={() => addNode('Gain')}>+ Gain</button>
+        <button  onClick={() => addNode('Reverb')}>+ Reverb</button>
       </div>
 
       {/* Canvas */}
