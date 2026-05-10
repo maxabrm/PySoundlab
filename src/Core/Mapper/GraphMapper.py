@@ -22,4 +22,5 @@ class GraphMapper:
             if node1 and node2:
                 graph.addConnection(node1, node2)
 
+        graph.sortByConnections()
         return graph

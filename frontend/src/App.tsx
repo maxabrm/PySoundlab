@@ -42,6 +42,7 @@ export default function App() {
         return;
       }
       const data = await res.json();
+      console.log('Code raw:', JSON.stringify(data.code));
       setGeneratedCode(data.code ?? '');
     } catch (e) {
       console.error('Fetch failed:', e);
@@ -145,14 +146,9 @@ export default function App() {
           <button style={{ marginBottom: '8px' }} onClick={generateCode}>
             Code generieren
           </button>
-          <div style={{height: '100%'}}>
-          <textarea
-            readOnly
-            value={generatedCode}
-            placeholder="Hier steht bald Code!"
-            style={{ width: '100%',height: '70%',flex: 1, background: '#2a2a3e', color: 'white', border: '1px solid #555', borderRadius: '4px', padding: '4px', resize: 'none' }}
-          />
-          </div>
+          <pre style={{ height: '70%', overflowY: 'auto', background: '#282c34', color: '#abb2bf', borderRadius: '4px', fontSize: '12px', padding: '8px', margin: 0, whiteSpace: 'pre' }}>
+            {generatedCode || '// Hier steht bald Code!'}
+          </pre>
         </div>
 
       </div>

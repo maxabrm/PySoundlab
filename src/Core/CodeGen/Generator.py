@@ -51,6 +51,8 @@ class CodeGenerator:
         #main loop
         self.code += "void loop() {\n"
 
+        
+
         for node in self.audioGraph.nodes:
             if node.hasPoti():
                 self.code+=node.Poti.getPotiLoopCode()

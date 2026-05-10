@@ -79,3 +79,25 @@ class Graph:
             next_node = self.nodes[i + 1]
             code += f"AudioConnection patch_{i}({current_node.id}, 0, {next_node.id}, 0);\n"
         return code
+    
+    def sortByConnections(self):
+        CountInConnections = {n: 0 for n in self.nodes}
+        nextNodes= {n: None for n in self.nodes}
+
+        for conn in self.connections:
+            nextNodes[conn.node1].append(conn.node2)
+            CountInConnections[conn.node2] += 1
+            
+        sorted_nodes = []
+        iterationNode = next(n for n in self.nodes if CountInConnections[n] == 0)
+
+        sorted_nodes.append(iterationNode)
+
+        while nextNodes[iterationNode]:
+            iterationNode = nextNodes[iterationNode]
+            sorted_nodes.append(iterationNode)
+
+        self.nodes = sorted_nodes
+
+
+        
