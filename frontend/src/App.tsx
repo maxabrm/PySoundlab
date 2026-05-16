@@ -9,7 +9,7 @@ import DelayNode from './Nodes/DelayNode';
 import FilterNode from './Nodes/FilterNode';
 import GainNode from './Nodes/GainNode';
 import ReverbNode from './Nodes/ReverbNode';
-import { useState } from 'react';
+import { useState }  from 'react';
 import { buildGraphPayload } from './utils/buildGraphPayload';
 
 const nodeTypes = {

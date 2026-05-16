@@ -1,5 +1,6 @@
 
 from typing import Optional
+from typing import List
 
 class Poti:
     id: str
@@ -23,27 +24,30 @@ class Poti:
         code = f"{self.id}.update();\n"
         return code
 
-class Node: 
+class Node:
 
     id: str
     teensyAudioClass: str
-    parameter: float
+    parameter: Optional[dict[str, float]] = None
     parameterTitle: str
-    Poti: Optional['Poti']
+    Potis: Optional[dict[str, Poti]] = None
 
-
-    def __init__(self, id: str, teensyAudioClass: str, parameter: float, parameterTitle: str, Poti: Optional['Poti']) -> None:
+    def __init__(self, id: str, teensyAudioClass: str, parameter: float, parameterTitle: str, Poti: Optional[dict[str, Poti]] = None) -> None:
         self.id = id
         self.teensyAudioClass = teensyAudioClass
         self.parameter = parameter
         self.parameterTitle = parameterTitle
-        self.Poti = Poti
+        if Poti is not None:
+            self.Potis = Poti
 
     def hasPoti(self) -> bool:
-        if self.Poti is not None:
+        if self.Potis is not None:
             return True
         else:
             return False
+        
+    def getPoti(self) -> List:
+        return self.Potis
 
     def getID(self) -> str:
         return self.id
